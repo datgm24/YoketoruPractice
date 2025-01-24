@@ -19,6 +19,15 @@ public class Player : MonoBehaviour, IGameStateListener
 
     public UnityEvent<IGameStateListener> GameStateListenerDestroyed { get; private set; } = new();
 
+    Vector3 startPosition;
+    Vector3 startRotation;
+
+    void Awake()
+    {
+        startPosition = transform.position;
+        startRotation = transform.Find("Pivot").eulerAngles;
+    }
+
     /// <summary>
     /// フレーム更新
     /// </summary>
@@ -68,6 +77,8 @@ public class Player : MonoBehaviour, IGameStateListener
 
             case State.Reset:
                 Debug.Log($"座標と向きを、Awakeで記録したものに戻す");
+                transform.position = startPosition;
+                transform.Find("Pivot").eulerAngles = startRotation;
                 break;
         }
     }
