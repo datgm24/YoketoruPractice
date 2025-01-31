@@ -4,7 +4,7 @@ public class InputController
 {
     IInput[] inputs =
     {
-
+        new KeyInput(),
     };
 
     public void Update()
